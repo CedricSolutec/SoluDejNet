@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SoluDejModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Evenements">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Restaurant" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="PlacesLimitees" Type="bit" />
+          <Property Name="NombrePlaces" Type="int" />
+          <Property Name="Commentaire" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Restaurants">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="nvarchar(max)" />
+          <Property Name="Adresse" Type="nvarchar(max)" />
+          <Property Name="SiteWeb" Type="nvarchar(max)" />
+          <Property Name="Telephone" Type="nvarchar(max)" />
+          <Property Name="Commentaire" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_Evenement_Restaurant">
+          <End Role="Restaurants" Type="Self.Restaurants" Multiplicity="1" />
+          <End Role="Evenements" Type="Self.Evenements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurants">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Evenements">
+              <PropertyRef Name="Restaurant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SoluDejModelStoreContainer">
+          <EntitySet Name="Evenements" EntityType="Self.Evenements" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Restaurants" EntityType="Self.Restaurants" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Evenement_Restaurant" Association="Self.FK_Evenement_Restaurant">
+            <End Role="Restaurants" EntitySet="Restaurants" />
+            <End Role="Evenements" EntitySet="Evenements" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SoluDejModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SoluDejEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Restaurants" EntityType="SoluDejModel.Restaurants" />
+          <EntitySet Name="Evenements" EntityType="SoluDejModel.Evenements" />
+          <AssociationSet Name="FK_Evenement_Restaurant" Association="SoluDejModel.FK_Evenement_Restaurant">
+            <End Role="Restaurants" EntitySet="Restaurants" />
+            <End Role="Evenements" EntitySet="Evenements" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Restaurants">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Adresse" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SiteWeb" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Telephone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Commentaire" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Evenements" Relationship="SoluDejModel.FK_Evenement_Restaurant" FromRole="Restaurants" ToRole="Evenements" />
+        </EntityType>
+        <EntityType Name="Evenements">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Restaurant" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PlacesLimitees" Type="Boolean" />
+          <Property Name="NombrePlaces" Type="Int32" />
+          <Property Name="Commentaire" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Restaurants" Relationship="SoluDejModel.FK_Evenement_Restaurant" FromRole="Evenements" ToRole="Restaurants" />
+        </EntityType>
+        <Association Name="FK_Evenement_Restaurant">
+          <End Type="SoluDejModel.Restaurants" Role="Restaurants" Multiplicity="1" />
+          <End Type="SoluDejModel.Evenements" Role="Evenements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurants">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Evenements">
+              <PropertyRef Name="Restaurant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SoluDejModelStoreContainer" CdmEntityContainer="SoluDejEntities">
+          <EntitySetMapping Name="Restaurants">
+            <EntityTypeMapping TypeName="SoluDejModel.Restaurants">
+              <MappingFragment StoreEntitySet="Restaurants">
+                <ScalarProperty Name="Commentaire" ColumnName="Commentaire" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="SiteWeb" ColumnName="SiteWeb" />
+                <ScalarProperty Name="Adresse" ColumnName="Adresse" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Evenements">
+            <EntityTypeMapping TypeName="SoluDejModel.Evenements">
+              <MappingFragment StoreEntitySet="Evenements">
+                <ScalarProperty Name="Commentaire" ColumnName="Commentaire" />
+                <ScalarProperty Name="NombrePlaces" ColumnName="NombrePlaces" />
+                <ScalarProperty Name="PlacesLimitees" ColumnName="PlacesLimitees" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Restaurant" ColumnName="Restaurant" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

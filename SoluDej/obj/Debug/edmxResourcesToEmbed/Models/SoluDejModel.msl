@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SoluDejModelStoreContainer" CdmEntityContainer="SoluDejEntities">
+    <EntitySetMapping Name="Restaurants">
+      <EntityTypeMapping TypeName="SoluDejModel.Restaurants">
+        <MappingFragment StoreEntitySet="Restaurants">
+          <ScalarProperty Name="Commentaire" ColumnName="Commentaire" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+          <ScalarProperty Name="SiteWeb" ColumnName="SiteWeb" />
+          <ScalarProperty Name="Adresse" ColumnName="Adresse" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Evenements">
+      <EntityTypeMapping TypeName="SoluDejModel.Evenements">
+        <MappingFragment StoreEntitySet="Evenements">
+          <ScalarProperty Name="Commentaire" ColumnName="Commentaire" />
+          <ScalarProperty Name="NombrePlaces" ColumnName="NombrePlaces" />
+          <ScalarProperty Name="PlacesLimitees" ColumnName="PlacesLimitees" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Restaurant" ColumnName="Restaurant" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
