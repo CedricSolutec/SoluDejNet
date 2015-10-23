@@ -1,13 +1,14 @@
 ﻿@model SoluDej.Models.Utilisateurs
 
 @{
-    ViewBag.Title = "SoluDej - Suppression d'utilisateur";
+    ViewBag.Title = "Details";
 }
 
-<h2>Suppression d'utilisateur</h2>
+<h2>Details</h2>
 
-<h3>Etes vous sur de vouloir supprimer cet utilisateur ?</h3>
 <div>
+    <h4>Utilisateurs</h4>
+    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.nom)
@@ -66,13 +67,8 @@
         </dd>
 
     </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Supprimer" class="btn btn-default" /> |
-            @Html.ActionLink("Retour", "Index")
-        </div>
-    }
 </div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

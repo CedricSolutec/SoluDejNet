@@ -146,6 +146,7 @@
     <Compile Include="Controllers\EntreprisesController.cs" />
     <Compile Include="Controllers\EvenementsController.cs" />
     <Compile Include="Controllers\RestaurantsController.cs" />
+    <Compile Include="Controllers\Utilisateurs1Controller.cs" />
     <Compile Include="Controllers\UtilisateursController.cs" />
     <Compile Include="Controllers\VillesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -161,6 +162,7 @@
       <DependentUpon>SoluDejModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Metadata.cs" />
+    <Compile Include="Models\PartialClasses.cs" />
     <Compile Include="Models\Restaurants.cs">
       <DependentUpon>SoluDejModel.tt</DependentUpon>
     </Compile>
@@ -220,6 +222,11 @@
     <Content Include="Views\Utilisateurs\Details.cshtml" />
     <Content Include="Views\Utilisateurs\Edit.cshtml" />
     <Content Include="Views\Utilisateurs\Index.cshtml" />
+    <Content Include="Views\Utilisateurs1\Create.cshtml" />
+    <Content Include="Views\Utilisateurs1\Delete.cshtml" />
+    <Content Include="Views\Utilisateurs1\Details.cshtml" />
+    <Content Include="Views\Utilisateurs1\Edit.cshtml" />
+    <Content Include="Views\Utilisateurs1\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
