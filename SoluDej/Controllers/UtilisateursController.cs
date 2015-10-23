@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using SoluDej.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using SoluDej.Models;
 
 namespace SoluDej.Controllers
 {
@@ -39,7 +35,7 @@ namespace SoluDej.Controllers
         // GET: Utilisateurs/Create
         public ActionResult Create()
         {
-            ViewBag.idEntreprise = new SelectList(db.Entreprises, "id", "nom");
+            ViewBag.Entreprise = new SelectList(db.Entreprises, "id", "nom");
             return View();
         }
 
@@ -57,7 +53,7 @@ namespace SoluDej.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.idEntreprise = new SelectList(db.Entreprises, "id", "nom", utilisateurs.idEntreprise);
+            ViewBag.Entreprise = new SelectList(db.Entreprises, "id", "nom", utilisateurs.idEntreprise);
             return View(utilisateurs);
         }
 
@@ -73,7 +69,7 @@ namespace SoluDej.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.idEntreprise = new SelectList(db.Entreprises, "id", "nom", utilisateurs.idEntreprise);
+            ViewBag.Entreprise = new SelectList(db.Entreprises, "id", "nom", utilisateurs.idEntreprise);
             return View(utilisateurs);
         }
 
@@ -90,7 +86,7 @@ namespace SoluDej.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.idEntreprise = new SelectList(db.Entreprises, "id", "nom", utilisateurs.idEntreprise);
+            ViewBag.Entreprise = new SelectList(db.Entreprises, "id", "nom", utilisateurs.idEntreprise);
             return View(utilisateurs);
         }
 
