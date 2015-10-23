@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<SoluDej.Models.Restaurants>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "SoluDej - Liste des restaurants";
 }
 
-<h2>Index</h2>
+<h2>Liste des restaurants</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Créer un nouveau restaurant", "Create")
 </p>
 <table class="table">
     <tr>
@@ -47,9 +47,9 @@
             @Html.DisplayFor(modelItem => item.Commentaire)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Editer", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Supprimer", "Delete", new { id = item.Id })
         </td>
     </tr>
 }

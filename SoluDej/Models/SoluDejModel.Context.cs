@@ -27,5 +27,9 @@ namespace SoluDej.Models
     
         public DbSet<Restaurants> Restaurants { get; set; }
         public DbSet<Evenements> Evenements { get; set; }
+        public DbSet<Arrondissements> Arrondissements { get; set; }
+        public DbSet<Entreprises> Entreprises { get; set; }
+        public DbSet<Villes> Villes { get; set; }
+        public DbSet<Utilisateurs> Utilisateurs { get; set; }
     }
 }

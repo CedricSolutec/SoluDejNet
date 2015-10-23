@@ -1,0 +1,72 @@
+﻿@model SoluDej.Models.Utilisateurs
+
+@{
+    ViewBag.Title = "SoluDej - Détails de l'utilisateur";
+}
+
+<h2>Détails de l'utilisateur</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prenom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prenom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mailSolutec)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mailSolutec)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mailNotification)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mailNotification)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.motDePasse)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.motDePasse)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dateDeNaissance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateDeNaissance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Entreprises.nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Entreprises.nom)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editer", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Retour", "Index")
+</p>

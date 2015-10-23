@@ -9,22 +9,27 @@
 
 namespace SoluDej.Models
 {
+    using System;
     using System.Collections.Generic;
-
+    
     public partial class Restaurants
     {
         public Restaurants()
         {
             this.Evenements = new HashSet<Evenements>();
         }
-
+    
         public int Id { get; set; }
         public string Nom { get; set; }
         public string Adresse { get; set; }
         public string SiteWeb { get; set; }
         public string Telephone { get; set; }
         public string Commentaire { get; set; }
-
+        public Nullable<int> Ville { get; set; }
+        public Nullable<int> Arrondissement { get; set; }
+    
         public virtual ICollection<Evenements> Evenements { get; set; }
+        public virtual Arrondissements Arrondissements { get; set; }
+        public virtual Villes Villes { get; set; }
     }
 }

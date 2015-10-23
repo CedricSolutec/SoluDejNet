@@ -7,6 +7,34 @@
       <End Role="Restaurants" EntitySet="Restaurants" />
       <End Role="Evenements" EntitySet="Evenements" />
     </AssociationSet>
+    <EntitySet Name="Arrondissements" EntityType="SoluDejModel.Arrondissements" />
+    <EntitySet Name="Entreprises" EntityType="SoluDejModel.Entreprises" />
+    <EntitySet Name="Villes" EntityType="SoluDejModel.Villes" />
+    <AssociationSet Name="FK_Arrondissements_Villes" Association="SoluDejModel.FK_Arrondissements_Villes">
+      <End Role="Villes" EntitySet="Villes" />
+      <End Role="Arrondissements" EntitySet="Arrondissements" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Entreprises_Arrondissements" Association="SoluDejModel.FK_Entreprises_Arrondissements">
+      <End Role="Arrondissements" EntitySet="Arrondissements" />
+      <End Role="Entreprises" EntitySet="Entreprises" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Restaurants_Arrondissements" Association="SoluDejModel.FK_Restaurants_Arrondissements">
+      <End Role="Arrondissements" EntitySet="Arrondissements" />
+      <End Role="Restaurants" EntitySet="Restaurants" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Entreprises_Villes" Association="SoluDejModel.FK_Entreprises_Villes">
+      <End Role="Villes" EntitySet="Villes" />
+      <End Role="Entreprises" EntitySet="Entreprises" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Restaurants_Villes" Association="SoluDejModel.FK_Restaurants_Villes">
+      <End Role="Villes" EntitySet="Villes" />
+      <End Role="Restaurants" EntitySet="Restaurants" />
+    </AssociationSet>
+    <EntitySet Name="Utilisateurs" EntityType="SoluDejModel.Utilisateurs" />
+    <AssociationSet Name="FK_Utilisateurs_Entreprises" Association="SoluDejModel.FK_Utilisateurs_Entreprises">
+      <End Role="Entreprises" EntitySet="Entreprises" />
+      <End Role="Utilisateurs" EntitySet="Utilisateurs" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Restaurants">
     <Key>
@@ -19,6 +47,10 @@
     <Property Name="Telephone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Commentaire" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Evenements" Relationship="SoluDejModel.FK_Evenement_Restaurant" FromRole="Restaurants" ToRole="Evenements" />
+    <Property Name="Ville" Type="Int32" />
+    <Property Name="Arrondissement" Type="Int32" />
+    <NavigationProperty Name="Arrondissements" Relationship="SoluDejModel.FK_Restaurants_Arrondissements" FromRole="Restaurants" ToRole="Arrondissements" />
+    <NavigationProperty Name="Villes" Relationship="SoluDejModel.FK_Restaurants_Villes" FromRole="Restaurants" ToRole="Villes" />
   </EntityType>
   <EntityType Name="Evenements">
     <Key>
@@ -27,7 +59,7 @@
     <Property Name="Id" Type="Int32" Nullable="false" />
     <Property Name="Restaurant" Type="Int32" Nullable="false" />
     <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="PlacesLimitees" Type="Boolean" />
+    <Property Name="PlacesLimitees" Type="Boolean" Nullable="false" />
     <Property Name="NombrePlaces" Type="Int32" />
     <Property Name="Commentaire" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Restaurants" Relationship="SoluDejModel.FK_Evenement_Restaurant" FromRole="Evenements" ToRole="Restaurants" />
@@ -41,6 +73,125 @@
       </Principal>
       <Dependent Role="Evenements">
         <PropertyRef Name="Restaurant" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Arrondissements">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Ville" Type="Int32" Nullable="false" />
+    <Property Name="Arrondissement" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Villes" Relationship="SoluDejModel.FK_Arrondissements_Villes" FromRole="Arrondissements" ToRole="Villes" />
+    <NavigationProperty Name="Entreprises" Relationship="SoluDejModel.FK_Entreprises_Arrondissements" FromRole="Arrondissements" ToRole="Entreprises" />
+    <NavigationProperty Name="Restaurants" Relationship="SoluDejModel.FK_Restaurants_Arrondissements" FromRole="Arrondissements" ToRole="Restaurants" />
+  </EntityType>
+  <EntityType Name="Entreprises">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="arrondissement" Type="Int32" Nullable="false" />
+    <Property Name="ville" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Arrondissements" Relationship="SoluDejModel.FK_Entreprises_Arrondissements" FromRole="Entreprises" ToRole="Arrondissements" />
+    <NavigationProperty Name="Villes" Relationship="SoluDejModel.FK_Entreprises_Villes" FromRole="Entreprises" ToRole="Villes" />
+    <NavigationProperty Name="Utilisateurs" Relationship="SoluDejModel.FK_Utilisateurs_Entreprises" FromRole="Entreprises" ToRole="Utilisateurs" />
+  </EntityType>
+  <EntityType Name="Villes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Ville" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Arrondissements" Relationship="SoluDejModel.FK_Arrondissements_Villes" FromRole="Villes" ToRole="Arrondissements" />
+    <NavigationProperty Name="Entreprises" Relationship="SoluDejModel.FK_Entreprises_Villes" FromRole="Villes" ToRole="Entreprises" />
+    <NavigationProperty Name="Restaurants" Relationship="SoluDejModel.FK_Restaurants_Villes" FromRole="Villes" ToRole="Restaurants" />
+  </EntityType>
+  <Association Name="FK_Arrondissements_Villes">
+    <End Type="SoluDejModel.Villes" Role="Villes" Multiplicity="1" />
+    <End Type="SoluDejModel.Arrondissements" Role="Arrondissements" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Villes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Arrondissements">
+        <PropertyRef Name="Ville" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Entreprises_Arrondissements">
+    <End Type="SoluDejModel.Arrondissements" Role="Arrondissements" Multiplicity="1" />
+    <End Type="SoluDejModel.Entreprises" Role="Entreprises" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Arrondissements">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Entreprises">
+        <PropertyRef Name="arrondissement" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Restaurants_Arrondissements">
+    <End Type="SoluDejModel.Arrondissements" Role="Arrondissements" Multiplicity="0..1" />
+    <End Type="SoluDejModel.Restaurants" Role="Restaurants" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Arrondissements">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Restaurants">
+        <PropertyRef Name="Arrondissement" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Entreprises_Villes">
+    <End Type="SoluDejModel.Villes" Role="Villes" Multiplicity="1" />
+    <End Type="SoluDejModel.Entreprises" Role="Entreprises" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Villes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Entreprises">
+        <PropertyRef Name="ville" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Restaurants_Villes">
+    <End Type="SoluDejModel.Villes" Role="Villes" Multiplicity="0..1" />
+    <End Type="SoluDejModel.Restaurants" Role="Restaurants" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Villes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Restaurants">
+        <PropertyRef Name="Ville" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Utilisateurs">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="nom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="prenom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="mailSolutec" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="mailNotification" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="motDePasse" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="dateDeNaissance" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="idEntreprise" Type="Int32" Nullable="false" />
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Entreprises" Relationship="SoluDejModel.FK_Utilisateurs_Entreprises" FromRole="Utilisateurs" ToRole="Entreprises" />
+  </EntityType>
+  <Association Name="FK_Utilisateurs_Entreprises">
+    <End Type="SoluDejModel.Entreprises" Role="Entreprises" Multiplicity="1" />
+    <End Type="SoluDejModel.Utilisateurs" Role="Utilisateurs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entreprises">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Utilisateurs">
+        <PropertyRef Name="idEntreprise" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

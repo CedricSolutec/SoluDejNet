@@ -1,5 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="SoluDejModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Arrondissements">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Ville" Type="int" Nullable="false" />
+    <Property Name="Arrondissement" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Entreprises">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nom" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="arrondissement" Type="int" Nullable="false" />
+    <Property Name="ville" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Evenements">
     <Key>
       <PropertyRef Name="Id" />
@@ -7,7 +24,7 @@
     <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="Restaurant" Type="int" Nullable="false" />
     <Property Name="Date" Type="date" Nullable="false" />
-    <Property Name="PlacesLimitees" Type="bit" />
+    <Property Name="PlacesLimitees" Type="bit" Nullable="false" />
     <Property Name="NombrePlaces" Type="int" />
     <Property Name="Commentaire" Type="varchar" MaxLength="50" />
   </EntityType>
@@ -21,7 +38,65 @@
     <Property Name="SiteWeb" Type="nvarchar(max)" />
     <Property Name="Telephone" Type="nvarchar(max)" />
     <Property Name="Commentaire" Type="nvarchar(max)" />
+    <Property Name="Ville" Type="int" />
+    <Property Name="Arrondissement" Type="int" />
   </EntityType>
+  <EntityType Name="Utilisateurs">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="nom" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="prenom" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="mailSolutec" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="mailNotification" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="motDePasse" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="dateDeNaissance" Type="date" Nullable="false" />
+    <Property Name="idEntreprise" Type="int" Nullable="false" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Villes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Ville" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Arrondissements_Villes">
+    <End Role="Villes" Type="Self.Villes" Multiplicity="1" />
+    <End Role="Arrondissements" Type="Self.Arrondissements" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Villes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Arrondissements">
+        <PropertyRef Name="Ville" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Entreprises_Arrondissements">
+    <End Role="Arrondissements" Type="Self.Arrondissements" Multiplicity="1" />
+    <End Role="Entreprises" Type="Self.Entreprises" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Arrondissements">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Entreprises">
+        <PropertyRef Name="arrondissement" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Entreprises_Villes">
+    <End Role="Villes" Type="Self.Villes" Multiplicity="1" />
+    <End Role="Entreprises" Type="Self.Entreprises" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Villes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Entreprises">
+        <PropertyRef Name="ville" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Evenement_Restaurant">
     <End Role="Restaurants" Type="Self.Restaurants" Multiplicity="1" />
     <End Role="Evenements" Type="Self.Evenements" Multiplicity="*" />
@@ -34,12 +109,76 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Restaurants_Arrondissements">
+    <End Role="Arrondissements" Type="Self.Arrondissements" Multiplicity="0..1" />
+    <End Role="Restaurants" Type="Self.Restaurants" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Arrondissements">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Restaurants">
+        <PropertyRef Name="Arrondissement" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Restaurants_Villes">
+    <End Role="Villes" Type="Self.Villes" Multiplicity="0..1" />
+    <End Role="Restaurants" Type="Self.Restaurants" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Villes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Restaurants">
+        <PropertyRef Name="Ville" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Utilisateurs_Entreprises">
+    <End Role="Entreprises" Type="Self.Entreprises" Multiplicity="1" />
+    <End Role="Utilisateurs" Type="Self.Utilisateurs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entreprises">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Utilisateurs">
+        <PropertyRef Name="idEntreprise" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="SoluDejModelStoreContainer">
+    <EntitySet Name="Arrondissements" EntityType="Self.Arrondissements" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Entreprises" EntityType="Self.Entreprises" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Evenements" EntityType="Self.Evenements" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Restaurants" EntityType="Self.Restaurants" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Utilisateurs" EntityType="Self.Utilisateurs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Villes" EntityType="Self.Villes" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Arrondissements_Villes" Association="Self.FK_Arrondissements_Villes">
+      <End Role="Villes" EntitySet="Villes" />
+      <End Role="Arrondissements" EntitySet="Arrondissements" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Entreprises_Arrondissements" Association="Self.FK_Entreprises_Arrondissements">
+      <End Role="Arrondissements" EntitySet="Arrondissements" />
+      <End Role="Entreprises" EntitySet="Entreprises" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Entreprises_Villes" Association="Self.FK_Entreprises_Villes">
+      <End Role="Villes" EntitySet="Villes" />
+      <End Role="Entreprises" EntitySet="Entreprises" />
+    </AssociationSet>
     <AssociationSet Name="FK_Evenement_Restaurant" Association="Self.FK_Evenement_Restaurant">
       <End Role="Restaurants" EntitySet="Restaurants" />
       <End Role="Evenements" EntitySet="Evenements" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Restaurants_Arrondissements" Association="Self.FK_Restaurants_Arrondissements">
+      <End Role="Arrondissements" EntitySet="Arrondissements" />
+      <End Role="Restaurants" EntitySet="Restaurants" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Restaurants_Villes" Association="Self.FK_Restaurants_Villes">
+      <End Role="Villes" EntitySet="Villes" />
+      <End Role="Restaurants" EntitySet="Restaurants" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Utilisateurs_Entreprises" Association="Self.FK_Utilisateurs_Entreprises">
+      <End Role="Entreprises" EntitySet="Entreprises" />
+      <End Role="Utilisateurs" EntitySet="Utilisateurs" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

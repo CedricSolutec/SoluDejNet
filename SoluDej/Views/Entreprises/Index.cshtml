@@ -1,0 +1,45 @@
+﻿@model IEnumerable<SoluDej.Models.Entreprises>
+
+@{
+    ViewBag.Title = "SoluDej - Liste des Entreprises";
+}
+
+<h2>Liste des Entreprises</h2>
+
+<p>
+    @Html.ActionLink("Créer une nouvelle entreprise", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Arrondissements.Arrondissement)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Villes.Ville)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Arrondissements.Arrondissement)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Villes.Ville)
+        </td>
+        <td>
+            @Html.ActionLink("Editer", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Supprimer", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

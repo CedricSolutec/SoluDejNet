@@ -1,24 +1,33 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace SoluDej.Models
 {
-    public class EvenementMetadata
+    public partial class EvenementMetadata
     {
-        [Required]
-        public int Restaurant { get; set; }
-        [Required]
-        public System.DateTime Date { get; set; }
+        [StringLength(50)]
+        [Display(Name = "")]
+        public string Nom { get; set; }
+        public string Adresse { get; set; }
+        public string SiteWeb { get; set; }
+        public string Telephone { get; set; }
+        public string Commentaire { get; set; }
+
+        public virtual ICollection<Evenements> Evenements { get; set; }
+
+
     }
 
-    public class RestaurantMetadata
+    public partial class RestaurantMetadata
     {
         [StringLength(50)]
         [Display(Name = "Nom du restaurant")]
         [Required]
         public string Nom { get; set; }
-        [Required]
+
         [StringLength(50)]
         public string Adresse { get; set; }
-        public string SiteWeb { get; set; }
+
+        public virtual ICollection<Evenements> Evenements { get; set; }
     }
 }

@@ -4,6 +4,8 @@
     <EntitySetMapping Name="Restaurants">
       <EntityTypeMapping TypeName="SoluDejModel.Restaurants">
         <MappingFragment StoreEntitySet="Restaurants">
+          <ScalarProperty Name="Arrondissement" ColumnName="Arrondissement" />
+          <ScalarProperty Name="Ville" ColumnName="Ville" />
           <ScalarProperty Name="Commentaire" ColumnName="Commentaire" />
           <ScalarProperty Name="Telephone" ColumnName="Telephone" />
           <ScalarProperty Name="SiteWeb" ColumnName="SiteWeb" />
@@ -22,6 +24,47 @@
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="Restaurant" ColumnName="Restaurant" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Arrondissements">
+      <EntityTypeMapping TypeName="SoluDejModel.Arrondissements">
+        <MappingFragment StoreEntitySet="Arrondissements">
+          <ScalarProperty Name="Arrondissement" ColumnName="Arrondissement" />
+          <ScalarProperty Name="Ville" ColumnName="Ville" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Entreprises">
+      <EntityTypeMapping TypeName="SoluDejModel.Entreprises">
+        <MappingFragment StoreEntitySet="Entreprises">
+          <ScalarProperty Name="ville" ColumnName="ville" />
+          <ScalarProperty Name="arrondissement" ColumnName="arrondissement" />
+          <ScalarProperty Name="nom" ColumnName="nom" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Villes">
+      <EntityTypeMapping TypeName="SoluDejModel.Villes">
+        <MappingFragment StoreEntitySet="Villes">
+          <ScalarProperty Name="Ville" ColumnName="Ville" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Utilisateurs">
+      <EntityTypeMapping TypeName="SoluDejModel.Utilisateurs">
+        <MappingFragment StoreEntitySet="Utilisateurs">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="idEntreprise" ColumnName="idEntreprise" />
+          <ScalarProperty Name="dateDeNaissance" ColumnName="dateDeNaissance" />
+          <ScalarProperty Name="motDePasse" ColumnName="motDePasse" />
+          <ScalarProperty Name="mailNotification" ColumnName="mailNotification" />
+          <ScalarProperty Name="mailSolutec" ColumnName="mailSolutec" />
+          <ScalarProperty Name="prenom" ColumnName="prenom" />
+          <ScalarProperty Name="nom" ColumnName="nom" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

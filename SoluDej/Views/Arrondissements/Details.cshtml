@@ -1,0 +1,34 @@
+﻿@model SoluDej.Models.Arrondissements
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Arrondissements</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Arrondissement)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Arrondissement)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Villes.Ville)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Villes.Ville)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

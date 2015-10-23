@@ -17,7 +17,7 @@ namespace SoluDej.Models
         public int Id { get; set; }
         public int Restaurant { get; set; }
         public System.DateTime Date { get; set; }
-        public Nullable<bool> PlacesLimitees { get; set; }
+        public bool PlacesLimitees { get; set; }
         public Nullable<int> NombrePlaces { get; set; }
         public string Commentaire { get; set; }
     

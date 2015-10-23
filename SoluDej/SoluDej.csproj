@@ -142,16 +142,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ArrondissementsController.cs" />
+    <Compile Include="Controllers\EntreprisesController.cs" />
     <Compile Include="Controllers\EvenementsController.cs" />
     <Compile Include="Controllers\RestaurantsController.cs" />
+    <Compile Include="Controllers\UtilisateursController.cs" />
+    <Compile Include="Controllers\VillesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Arrondissements.cs">
+      <DependentUpon>SoluDejModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entreprises.cs">
+      <DependentUpon>SoluDejModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Evenements.cs">
       <DependentUpon>SoluDejModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Metadata.cs" />
-    <Compile Include="Models\PartialClasses.cs" />
     <Compile Include="Models\Restaurants.cs">
       <DependentUpon>SoluDejModel.tt</DependentUpon>
     </Compile>
@@ -170,6 +179,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SoluDejModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Utilisateurs.cs">
+      <DependentUpon>SoluDejModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Villes.cs">
+      <DependentUpon>SoluDejModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -185,6 +200,26 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Villes\Create.cshtml" />
+    <Content Include="Views\Villes\Delete.cshtml" />
+    <Content Include="Views\Villes\Details.cshtml" />
+    <Content Include="Views\Villes\Edit.cshtml" />
+    <Content Include="Views\Villes\Index.cshtml" />
+    <Content Include="Views\Arrondissements\Create.cshtml" />
+    <Content Include="Views\Arrondissements\Delete.cshtml" />
+    <Content Include="Views\Arrondissements\Details.cshtml" />
+    <Content Include="Views\Arrondissements\Edit.cshtml" />
+    <Content Include="Views\Arrondissements\Index.cshtml" />
+    <Content Include="Views\Entreprises\Create.cshtml" />
+    <Content Include="Views\Entreprises\Delete.cshtml" />
+    <Content Include="Views\Entreprises\Details.cshtml" />
+    <Content Include="Views\Entreprises\Edit.cshtml" />
+    <Content Include="Views\Entreprises\Index.cshtml" />
+    <Content Include="Views\Utilisateurs\Create.cshtml" />
+    <Content Include="Views\Utilisateurs\Delete.cshtml" />
+    <Content Include="Views\Utilisateurs\Details.cshtml" />
+    <Content Include="Views\Utilisateurs\Edit.cshtml" />
+    <Content Include="Views\Utilisateurs\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

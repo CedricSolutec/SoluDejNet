@@ -5,9 +5,19 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="cff7641e225c4ca8a9d4c659d04d2b73" Name="Diagram1">
-        <EntityTypeShape EntityType="SoluDejModel.Restaurants" Width="1.5" PointX="3.375" PointY="0.75" />
-        <EntityTypeShape EntityType="SoluDejModel.Evenements" Width="1.5" PointX="0.625" PointY="1.375" />
+        <EntityTypeShape EntityType="SoluDejModel.Restaurants" Width="1.5" PointX="3" PointY="0.625" />
+        <EntityTypeShape EntityType="SoluDejModel.Evenements" Width="1.5" PointX="0.875" PointY="0.5" />
         <AssociationConnector Association="SoluDejModel.FK_Evenement_Restaurant" />
+        <EntityTypeShape EntityType="SoluDejModel.Arrondissements" Width="1.5" PointX="1.875" PointY="4.375" />
+        <EntityTypeShape EntityType="SoluDejModel.Entreprises" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SoluDejModel.Villes" Width="1.5" PointX="4.875" PointY="4" />
+        <AssociationConnector Association="SoluDejModel.FK_Arrondissements_Villes" />
+        <AssociationConnector Association="SoluDejModel.FK_Entreprises_Arrondissements" />
+        <AssociationConnector Association="SoluDejModel.FK_Restaurants_Arrondissements" />
+        <AssociationConnector Association="SoluDejModel.FK_Entreprises_Villes" />
+        <AssociationConnector Association="SoluDejModel.FK_Restaurants_Villes" />
+        <EntityTypeShape EntityType="SoluDejModel.Utilisateurs" Width="1.5" PointX="8.125" PointY="0.75" />
+        <AssociationConnector Association="SoluDejModel.FK_Utilisateurs_Entreprises" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
